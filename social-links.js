@@ -1,5 +1,9 @@
 /* AI 教學觀察所｜Facebook + YouTube social hub */
 (() => {
+  const heroBrand = document.createElement('script');
+  heroBrand.src = 'hero-brand.js?v=20260906-2';
+  document.head.appendChild(heroBrand);
+
   const mount = () => {
     if (document.getElementById('social-network')) return;
 
@@ -48,115 +52,45 @@
     document.head.appendChild(style);
 
     const facebookLinks = [
-      {
-        label:'AI 藝術創新實驗室',
-        handle:'facebook.com/tsengkuocheng',
-        url:'https://www.facebook.com/tsengkuocheng',
-        desc:'<strong>我的 AI 藝術創作</strong>｜記錄生成式 AI 藝術、數位創作、作品實驗與創作思考。'
-      },
-      {
-        label:'ELARA 女子團體',
-        handle:'profile id · 61584961148067',
-        url:'https://www.facebook.com/profile.php?id=61584961148067',
-        desc:'<strong>我的虛擬女子偶像團體</strong>｜記錄 ELARA 的角色形象、視覺企劃、音樂與虛擬偶像創作。'
-      },
-      {
-        label:'藍曬美學',
-        handle:'facebook.com/cyanotype2017',
-        url:'https://www.facebook.com/cyanotype2017/',
-        desc:'<strong>我的藍曬資料與分享</strong>｜整理 Cyanotype 藍曬技法、創作案例、美學研究與相關資料。'
-      },
-      {
-        label:'K&J 的美好日記',
-        handle:'facebook.com/kandj.wanderlife',
-        url:'https://www.facebook.com/kandj.wanderlife/',
-        desc:'<strong>記錄我的生活旅遊</strong>｜保存旅行、風景、日常生活與 K&J 一起走過的美好片段。'
-      }
+      {label:'AI 藝術創新實驗室',handle:'facebook.com/tsengkuocheng',url:'https://www.facebook.com/tsengkuocheng',desc:'<strong>我的 AI 藝術創作</strong>｜記錄生成式 AI 藝術、數位創作、作品實驗與創作思考。'},
+      {label:'ELARA 女子團體',handle:'profile id · 61584961148067',url:'https://www.facebook.com/profile.php?id=61584961148067',desc:'<strong>我的虛擬女子偶像團體</strong>｜記錄 ELARA 的角色形象、視覺企劃、音樂與虛擬偶像創作。'},
+      {label:'藍曬美學',handle:'facebook.com/cyanotype2017',url:'https://www.facebook.com/cyanotype2017/',desc:'<strong>我的藍曬資料與分享</strong>｜整理 Cyanotype 藍曬技法、創作案例、美學研究與相關資料。'},
+      {label:'K&J 的美好日記',handle:'facebook.com/kandj.wanderlife',url:'https://www.facebook.com/kandj.wanderlife/',desc:'<strong>記錄我的生活旅遊</strong>｜保存旅行、風景、日常生活與 K&J 一起走過的美好片段。'}
     ];
 
     const youtubeLinks = [
-      {
-        label:'AI 教學觀察所｜YouTube',
-        handle:'youtube.com/@AI教學觀察所',
-        url:'https://www.youtube.com/@AI%E6%95%99%E5%AD%B8%E8%A7%80%E5%AF%9F%E6%89%80',
-        desc:'<strong>我的 AI 教學紀錄頻道</strong>｜整理課堂實踐、AI 融入教學、教學觀察與數位學習案例。'
-      },
-      {
-        label:'iMusicLab｜AI 音樂創作',
-        handle:'youtube.com/@iMusicLab-f2k',
-        url:'https://www.youtube.com/@iMusicLab-f2k',
-        desc:'<strong>我的 AI 音樂創作頻道</strong>｜分享 AI 音樂、歌曲實驗、聲音創作與相關影音作品。'
-      },
-      {
-        label:'AI 藝術創新實驗室｜YouTube',
-        handle:'youtube.com/@AI藝術創新實驗室-t8d',
-        url:'https://www.youtube.com/@AI%E8%97%9D%E8%A1%93%E5%89%B5%E6%96%B0%E5%AF%A6%E9%A9%97%E5%AE%A4-t8d/videos',
-        desc:'<strong>我的 AI 藝術創作頻道</strong>｜收錄生成式 AI 影像、藝術創作、動畫實驗與作品展示。'
-      }
+      {label:'AI 教學觀察所｜YouTube',handle:'youtube.com/@AI教學觀察所',url:'https://www.youtube.com/@AI%E6%95%99%E5%AD%B8%E8%A7%80%E5%AF%9F%E6%89%80',desc:'<strong>我的 AI 教學紀錄頻道</strong>｜整理課堂實踐、AI 融入教學、教學觀察與數位學習案例。'},
+      {label:'iMusicLab｜AI 音樂創作',handle:'youtube.com/@iMusicLab-f2k',url:'https://www.youtube.com/@iMusicLab-f2k',desc:'<strong>我的 AI 音樂創作頻道</strong>｜分享 AI 音樂、歌曲實驗、聲音創作與相關影音作品。'},
+      {label:'AI 藝術創新實驗室｜YouTube',handle:'youtube.com/@AI藝術創新實驗室-t8d',url:'https://www.youtube.com/@AI%E8%97%9D%E8%A1%93%E5%89%B5%E6%96%B0%E5%AF%A6%E9%A9%97%E5%AE%A4-t8d/videos',desc:'<strong>我的 AI 藝術創作頻道</strong>｜收錄生成式 AI 影像、藝術創作、動畫實驗與作品展示。'}
     ];
 
-    const cards = (items,platform) => items.map((item,i)=>`<a class="social-card ${platform==='YOUTUBE'?'youtube-card':''}" href="${item.url}" target="_blank" rel="noopener noreferrer" aria-label="前往 ${item.label}">
-      <div class="social-index">0${i+1} / ${platform}</div>
-      <div class="social-icon">${platform==='YOUTUBE'?'▶':'f'}</div>
-      <h3>${item.label}</h3>
-      <div class="social-handle">${item.handle}</div>
-      <p>${item.desc}</p>
-      <span class="social-arrow">↗</span>
-    </a>`).join('');
+    const cards = (items,platform) => items.map((item,i)=>`<a class="social-card ${platform==='YOUTUBE'?'youtube-card':''}" href="${item.url}" target="_blank" rel="noopener noreferrer" aria-label="前往 ${item.label}"><div class="social-index">0${i+1} / ${platform}</div><div class="social-icon">${platform==='YOUTUBE'?'▶':'f'}</div><h3>${item.label}</h3><div class="social-handle">${item.handle}</div><p>${item.desc}</p><span class="social-arrow">↗</span></a>`).join('');
 
     const section = document.createElement('section');
     section.id = 'social-network';
-    section.innerHTML = `
-      <div class="social-wrap reveal">
-        <div class="social-head">
-          <div>
-            <div class="social-kicker">SOCIAL NETWORK / 社群與頻道</div>
-            <h2>從教學、藝術創作，<br>走向音樂、旅行與生活。</h2>
-          </div>
-          <p>這裡整理我的 Facebook 與 YouTube 創作入口。不同平台承載不同面向：AI 教學、AI 藝術、虛擬偶像、藍曬、音樂創作，以及生活旅行紀錄。</p>
-        </div>
-
-        <div class="social-platform">
-          <div class="platform-title"><h3>Facebook｜四個創作與生活面向</h3><span>FACEBOOK NETWORK</span></div>
-          <div class="social-grid facebook">${cards(facebookLinks,'FACEBOOK')}</div>
-        </div>
-
-        <div class="social-platform">
-          <div class="platform-title"><h3>YouTube｜三個影音創作頻道</h3><span>YOUTUBE CHANNELS</span></div>
-          <div class="social-grid youtube">${cards(youtubeLinks,'YOUTUBE')}</div>
-        </div>
-
-        <div class="social-note"><span>AI Teaching Observatory · Social & Media Hub</span><span>4 個 Facebook ＋ 3 個 YouTube 頻道</span></div>
-      </div>`;
+    section.innerHTML = `<div class="social-wrap reveal"><div class="social-head"><div><div class="social-kicker">SOCIAL NETWORK / 社群與頻道</div><h2>從教學、藝術創作，<br>走向音樂、旅行與生活。</h2></div><p>這裡整理我的 Facebook 與 YouTube 創作入口。不同平台承載不同面向：AI 教學、AI 藝術、虛擬偶像、藍曬、音樂創作，以及生活旅行紀錄。</p></div><div class="social-platform"><div class="platform-title"><h3>Facebook｜四個創作與生活面向</h3><span>FACEBOOK NETWORK</span></div><div class="social-grid facebook">${cards(facebookLinks,'FACEBOOK')}</div></div><div class="social-platform"><div class="platform-title"><h3>YouTube｜三個影音創作頻道</h3><span>YOUTUBE CHANNELS</span></div><div class="social-grid youtube">${cards(youtubeLinks,'YOUTUBE')}</div></div><div class="social-note"><span>AI Teaching Observatory · Social & Media Hub</span><span>4 個 Facebook ＋ 3 個 YouTube 頻道</span></div></div>`;
 
     const works = document.getElementById('works');
     if (works) works.before(section); else document.querySelector('main')?.appendChild(section);
 
     const menu = document.querySelector('.menu');
     if (menu && !menu.querySelector('a[href="#social-network"]')) {
-      const a = document.createElement('a');
-      a.href = '#social-network';
-      a.textContent = '社群連結';
-      const about = menu.querySelector('a[href="#about"]');
-      if (about) menu.insertBefore(a, about); else menu.appendChild(a);
+      const a = document.createElement('a'); a.href = '#social-network'; a.textContent = '社群連結';
+      const about = menu.querySelector('a[href="#about"]'); if (about) menu.insertBefore(a, about); else menu.appendChild(a);
     }
 
     const allLinks = [...facebookLinks, ...youtubeLinks];
     const foot = document.querySelector('.foot');
     if (foot) {
-      const nav = document.createElement('div');
-      nav.className = 'social-footer-links';
+      const nav = document.createElement('div'); nav.className = 'social-footer-links';
       nav.innerHTML = allLinks.map(item=>`<a href="${item.url}" target="_blank" rel="noopener noreferrer">${item.label}</a>`).join('');
-      const left = foot.firstElementChild;
-      if (left) left.appendChild(nav);
+      const left = foot.firstElementChild; if (left) left.appendChild(nav);
     }
 
     if (window.IntersectionObserver) {
       const io = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.08});
       section.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-    } else {
-      section.querySelectorAll('.reveal').forEach(el=>el.classList.add('show'));
-    }
+    } else section.querySelectorAll('.reveal').forEach(el=>el.classList.add('show'));
   };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount); else mount();
