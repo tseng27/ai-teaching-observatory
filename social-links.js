@@ -37,28 +37,28 @@
 
     const links = [
       {
-        label:'曾國正｜Facebook',
+        label:'AI 藝術創新實驗室',
         handle:'facebook.com/tsengkuocheng',
         url:'https://www.facebook.com/tsengkuocheng',
-        desc:'個人動態、教學分享與創作交流的 Facebook 入口。'
+        desc:'聚焦生成式 AI 藝術、數位創作、作品實驗與當代藝術觀察的創作平台。'
       },
       {
-        label:'Facebook 專頁',
+        label:'ELARA 女子團體',
         handle:'profile id · 61584961148067',
         url:'https://www.facebook.com/profile.php?id=61584961148067',
-        desc:'另一個 Facebook 主題專頁入口，方便從網站直接前往。'
+        desc:'ELARA 女子團體的 Facebook 專頁，記錄團體形象、創作企劃與相關動態。'
       },
       {
-        label:'Cyanotype 2017',
+        label:'藍曬美學',
         handle:'facebook.com/cyanotype2017',
         url:'https://www.facebook.com/cyanotype2017/',
-        desc:'Cyanotype 主題社群與相關創作內容的延伸入口。'
+        desc:'以 Cyanotype 藍曬為核心，分享藍曬創作、美學實驗、影像與手作藝術。'
       },
       {
-        label:'K&J Wanderlife',
+        label:'K&J 的美好日記',
         handle:'facebook.com/kandj.wanderlife',
         url:'https://www.facebook.com/kandj.wanderlife/',
-        desc:'旅行、生活與影像紀錄的 Facebook 社群入口。'
+        desc:'記錄旅行、生活、風景與兩人共享的日常片段，保存生活中的美好觀看。'
       }
     ];
 
@@ -69,9 +69,9 @@
         <div class="social-head">
           <div>
             <div class="social-kicker">FACEBOOK NETWORK / 社群連結</div>
-            <h2>從教學、創作，<br>走向生活與觀看。</h2>
+            <h2>從教育、藝術創作，<br>延伸到影像與生活。</h2>
           </div>
-          <p>這裡整理我不同面向的 Facebook 社群入口。網站作為內容的長期策展與整理，而社群則保留即時分享、交流與生活的流動。</p>
+          <p>這四個 Facebook 社群分別承載我不同的創作與生活面向：AI 藝術、ELARA 女子團體、藍曬美學，以及 K&J 的旅行與生活日記。透過網站把這些面向重新串連，也保留各自獨立的社群個性。</p>
         </div>
         <div class="social-grid">
           ${links.map((item,i)=>`<a class="social-card" href="${item.url}" target="_blank" rel="noopener noreferrer" aria-label="前往 ${item.label}">
@@ -83,7 +83,7 @@
             <span class="social-arrow">↗</span>
           </a>`).join('')}
         </div>
-        <div class="social-note"><span>AI Teaching Observatory · Social Network</span><span>四個 Facebook 入口已整合至本站</span></div>
+        <div class="social-note"><span>AI Teaching Observatory · Social Network</span><span>四個 Facebook 品牌與生活入口</span></div>
       </div>`;
 
     const works = document.getElementById('works');
