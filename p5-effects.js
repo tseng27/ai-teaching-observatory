@@ -1,7 +1,107 @@
-/* AI 教學觀察所｜p5.js ambient interaction layer */
+/* AI 教學觀察所｜p5.js ambient interaction + immersive intro */
 (() => {
   const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
   const coarse = window.matchMedia?.('(pointer: coarse)').matches;
+
+  function installIntro() {
+    if (reduceMotion) return;
+    const seen = sessionStorage.getItem('aito-intro-seen');
+    if (seen) return;
+
+    const style = document.createElement('style');
+    style.textContent = `
+      #aito-intro{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;background:
+        radial-gradient(circle at 50% 46%,rgba(239,205,124,.34),transparent 28%),
+        radial-gradient(circle at 20% 20%,rgba(117,141,105,.18),transparent 24%),
+        linear-gradient(150deg,#19170f 0%,#2d281b 46%,#16231c 100%);overflow:hidden;color:#fff;transition:opacity .9s ease,visibility .9s ease}
+      #aito-intro.hide{opacity:0;visibility:hidden;pointer-events:none}
+      #aito-intro canvas{position:absolute;inset:0;width:100%;height:100%}
+      .aito-intro-copy{position:relative;z-index:2;text-align:center;padding:24px;transform:translateY(12px);opacity:0;animation:aitoCopy 1.2s .28s cubic-bezier(.2,.8,.2,1) forwards}
+      .aito-intro-mark{width:92px;height:92px;margin:0 auto 22px;border-radius:28px;border:1px solid rgba(235,197,111,.6);display:grid;place-items:center;font-size:42px;background:linear-gradient(145deg,rgba(255,244,208,.13),rgba(190,145,58,.22));box-shadow:0 0 0 8px rgba(255,255,255,.025),0 0 60px rgba(223,180,84,.22);backdrop-filter:blur(10px);animation:aitoGlow 2.3s ease-in-out infinite}
+      .aito-intro-kicker{font:700 12px/1.4 system-ui,sans-serif;letter-spacing:.28em;color:#dfc98f;margin-bottom:15px}
+      .aito-intro-title{font-family:"Noto Serif TC","PMingLiU",serif;font-size:clamp(42px,7vw,92px);line-height:1.05;letter-spacing:.06em;text-shadow:0 10px 40px rgba(0,0,0,.36)}
+      .aito-intro-en{font:400 clamp(14px,1.4vw,20px)/1.5 Georgia,serif;letter-spacing:.15em;color:#e9ddb9;margin-top:12px}
+      .aito-intro-line{width:0;height:1px;margin:22px auto 0;background:linear-gradient(90deg,transparent,#e8c873,transparent);animation:aitoLine 1.25s .75s ease forwards}
+      .aito-intro-hint{margin-top:15px;font:500 12px/1.4 system-ui,sans-serif;letter-spacing:.15em;color:rgba(255,255,255,.54)}
+      .aito-skip{position:absolute;right:24px;top:22px;z-index:3;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);color:rgba(255,255,255,.72);border-radius:999px;padding:8px 13px;cursor:pointer;backdrop-filter:blur(9px)}
+      @keyframes aitoCopy{to{opacity:1;transform:none}}
+      @keyframes aitoLine{to{width:min(360px,60vw)}}
+      @keyframes aitoGlow{50%{transform:translateY(-5px) scale(1.025);box-shadow:0 0 0 8px rgba(255,255,255,.035),0 0 90px rgba(223,180,84,.36)}}
+      @media(max-width:680px){.aito-intro-mark{width:76px;height:76px;border-radius:23px;font-size:34px}.aito-skip{right:14px;top:14px}.aito-intro-title{letter-spacing:.03em}}
+    `;
+    document.head.appendChild(style);
+
+    const overlay = document.createElement('div');
+    overlay.id = 'aito-intro';
+    overlay.innerHTML = `
+      <button class="aito-skip" type="button" aria-label="略過開場動畫">略過</button>
+      <div class="aito-intro-copy">
+        <div class="aito-intro-mark">✦</div>
+        <div class="aito-intro-kicker">OBSERVE · CREATE · TEACH</div>
+        <div class="aito-intro-title">AI 教學觀察所</div>
+        <div class="aito-intro-en">AI Teaching Observatory</div>
+        <div class="aito-intro-line"></div>
+        <div class="aito-intro-hint">藝術教育 × AI × 課堂實踐</div>
+      </div>`;
+    document.body.appendChild(overlay);
+    document.documentElement.style.overflow = 'hidden';
+
+    let introSketch = null;
+    if (window.p5) {
+      introSketch = new p5((p) => {
+        const pts = [];
+        const dust = [];
+        let born = 0;
+        p.setup = () => {
+          const c = p.createCanvas(window.innerWidth, window.innerHeight);
+          c.parent(overlay);
+          p.pixelDensity(Math.min(window.devicePixelRatio || 1, 1.5));
+          p.frameRate(coarse ? 30 : 45);
+          for (let i = 0; i < (coarse ? 64 : 110); i++) {
+            const a = p.random(p.TWO_PI), rr = p.random(60, Math.min(p.width,p.height)*.42);
+            pts.push({a,rr,sp:p.random(.0015,.005),s:p.random(1.2,3.7),o:p.random(40,130)});
+          }
+        };
+        p.draw = () => {
+          p.clear();
+          const cx=p.width/2, cy=p.height/2;
+          for (let i=0;i<pts.length;i++){
+            const q=pts[i]; q.a += q.sp;
+            const pulse = 1 + Math.sin(p.frameCount*.018+i)*.018;
+            const x=cx+Math.cos(q.a)*q.rr*pulse;
+            const y=cy+Math.sin(q.a)*q.rr*.56*pulse;
+            if(i%7===0){
+              p.noFill(); p.stroke(225,183,88,18); p.strokeWeight(.7);
+              p.line(cx,cy,x,y);
+            }
+            p.noStroke(); p.fill(i%3===0?100:225,i%3===0?132:188,i%3===0?96:96,q.o); p.circle(x,y,q.s*2);
+          }
+          if(p.frameCount%3===0 && dust.length<70){
+            dust.push({x:p.random(p.width),y:p.height+p.random(20,90),vy:p.random(.4,1.15),vx:p.random(-.18,.18),life:p.random(80,180),m:0,s:p.random(.7,2.1)});
+          }
+          for(let i=dust.length-1;i>=0;i--){
+            const d=dust[i];d.x+=d.vx;d.y-=d.vy;d.m++;d.life--;
+            p.noStroke();p.fill(238,202,125,Math.min(95,d.life));p.circle(d.x,d.y,d.s*2);
+            if(d.life<=0||d.y<-10)dust.splice(i,1);
+          }
+          born++;
+        };
+        p.windowResized=()=>p.resizeCanvas(window.innerWidth,window.innerHeight);
+      }, overlay);
+    }
+
+    let closed = false;
+    const close = () => {
+      if (closed) return;
+      closed = true;
+      sessionStorage.setItem('aito-intro-seen','1');
+      overlay.classList.add('hide');
+      document.documentElement.style.overflow = '';
+      setTimeout(() => { introSketch?.remove(); overlay.remove(); style.remove(); }, 950);
+    };
+    overlay.querySelector('.aito-skip')?.addEventListener('click', close);
+    setTimeout(close, coarse ? 2600 : 3300);
+  }
 
   function mountSketch() {
     if (!window.p5) return;
@@ -183,6 +283,6 @@
     addEventListener('scroll', sync, {passive:true}); sync();
   }
 
-  const start = () => { mountSketch(); addDomMotion(); };
+  const start = () => { installIntro(); mountSketch(); addDomMotion(); };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })();
