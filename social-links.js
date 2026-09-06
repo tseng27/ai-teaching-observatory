@@ -8,4 +8,5 @@
   };
   load('hero-brand.js?v=20260906-4');
   load('social-hub.js?v=20260906-1');
+  load('audience-copy.js?v=20260906-1');
 })();
