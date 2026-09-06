@@ -5,6 +5,10 @@
   premium.href = 'premium.css?v=20260906-2';
   document.head.appendChild(premium);
 
+  const socialLinks = document.createElement('script');
+  socialLinks.src = 'social-links.js?v=20260906-1';
+  document.head.appendChild(socialLinks);
+
   const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
   const coarse = window.matchMedia?.('(pointer: coarse)').matches;
 
