@@ -96,3 +96,214 @@ footer{background:#192921;color:#c9bda4;border-top:0;padding:46px 0}.foot b{colo
   section{padding:88px 0}.hero{padding-top:70px}.hero h1{font-size:clamp(3.9rem,18vw,6rem)}.head h2{font-size:2.8rem}
   .card:not(:first-child){grid-template-columns:1fr}.card:not(:first-child) .cover{min-height:220px}.path{min-height:280px}.toolgrid{grid-template-columns:1fr}.gallery{grid-template-columns:1fr 1fr;grid-auto-rows:200px}.about{grid-template-columns:1fr}.aboutvisual{border-left:1px solid rgba(145,101,37,.17);border-top:0}.aboutbox{padding:34px}.aboutbox h2{font-size:2.5rem}
 }
+
+/* ------------------------------------------------------------------
+   2026-09-07 HOME MOTION REFINEMENT
+   Morning light + logo rising from the book + frameless course imagery
+   ------------------------------------------------------------------ */
+.hero{isolation:isolate;overflow:visible}
+.stage{isolation:isolate;overflow:visible;perspective:1100px}
+
+/* light entering from an imagined window at upper-right */
+.stage:before{
+  content:"";
+  position:absolute;
+  z-index:-3;
+  pointer-events:none;
+  width:125%;
+  height:118%;
+  right:-38%;
+  top:-20%;
+  transform:rotate(-7deg) translate3d(0,0,0);
+  transform-origin:90% 0;
+  clip-path:polygon(36% 0,100% 0,76% 100%,0 100%);
+  background:
+    repeating-linear-gradient(108deg,transparent 0 8%,rgba(255,238,190,.11) 9% 13%,transparent 14% 23%),
+    linear-gradient(112deg,rgba(255,248,220,.02) 12%,rgba(255,229,159,.30) 48%,rgba(255,245,217,.06) 78%);
+  filter:blur(9px);
+  mix-blend-mode:screen;
+  opacity:.78;
+  animation:aitoWindowLight 12s ease-in-out infinite alternate;
+}
+.stage:after{
+  content:"";
+  position:absolute;
+  z-index:-2;
+  pointer-events:none;
+  inset:5% -5% 0 5%;
+  background:
+    radial-gradient(circle at 68% 30%,rgba(255,247,218,.72) 0 1px,transparent 2px),
+    radial-gradient(circle at 56% 50%,rgba(244,211,136,.48) 0 1px,transparent 2px),
+    radial-gradient(circle at 73% 62%,rgba(255,239,194,.42) 0 1.2px,transparent 2.2px),
+    radial-gradient(ellipse at 63% 58%,rgba(255,220,133,.24),transparent 47%);
+  background-size:94px 87px,137px 121px,181px 149px,auto;
+  filter:blur(.25px);
+  opacity:.74;
+  animation:aitoDustDrift 18s linear infinite;
+}
+
+/* keep the book as the physical anchor of the scene */
+.book{
+  z-index:5;
+  animation:aitoBookHover 7s ease-in-out infinite;
+  filter:drop-shadow(0 34px 27px rgba(78,48,11,.24));
+}
+.book:before{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:6px;
+  width:235px;
+  height:46px;
+  transform:translateX(-50%);
+  border-radius:50%;
+  background:radial-gradient(ellipse,rgba(107,68,20,.20),transparent 67%);
+  filter:blur(8px);
+  z-index:-1;
+}
+
+/* turn the existing central lamp into the real brand mark */
+.lamp{
+  top:-34px;
+  width:176px;
+  height:154px;
+  border-radius:0;
+  font-size:0;
+  color:transparent;
+  background:url('assets/ai-teaching-observatory-mark.svg') center/contain no-repeat;
+  box-shadow:none;
+  filter:drop-shadow(0 11px 15px rgba(108,67,9,.18));
+  transform:translateX(-50%) translateY(42px) scale(.76);
+  opacity:0;
+  animation:aitoLogoRise 2.15s .35s cubic-bezier(.16,.84,.32,1) forwards;
+}
+.lamp:before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:48%;
+  width:166px;
+  height:166px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(255,244,196,.72) 0,rgba(239,190,80,.26) 34%,rgba(237,189,78,.08) 56%,transparent 74%);
+  filter:blur(12px);
+  z-index:-1;
+  animation:aitoBreathAura 4.8s 2.25s ease-in-out infinite;
+}
+.lamp:after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:56%;
+  width:265px;
+  height:190px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  border:1px solid rgba(222,175,75,.18);
+  box-shadow:0 0 38px rgba(234,187,85,.14),inset 0 0 36px rgba(252,227,163,.12);
+  z-index:-2;
+  animation:aitoBreathRing 4.8s 2.25s ease-in-out infinite;
+}
+
+/* course tiles become floating visual fragments instead of translucent panels */
+.floatcard{
+  width:190px;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  overflow:visible;
+  animation-duration:7.5s;
+  animation-timing-function:ease-in-out;
+  animation-iteration-count:infinite;
+}
+.floatcard .pic{
+  height:108px;
+  border-radius:8px;
+  overflow:hidden;
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+  box-shadow:0 19px 39px rgba(63,43,18,.18),0 1px 0 rgba(255,255,255,.65) inset;
+  border:1px solid rgba(255,248,229,.66);
+}
+.floatcard .pic svg{opacity:0}
+.floatcard:nth-of-type(1) .pic{background-image:url('assets/course-future.webp')}
+.floatcard:nth-of-type(2) .pic{background-image:url('assets/course-ar.webp')}
+.floatcard:nth-of-type(3) .pic{background-image:url('assets/course-vr.jpg')}
+.floatcard:nth-of-type(4) .pic{background-image:url('assets/course-green.webp')}
+.floatcard b{
+  margin-top:9px;
+  padding:0 2px;
+  color:#443422;
+  background:transparent;
+  text-shadow:0 1px 7px rgba(255,252,240,.96),0 0 16px rgba(255,252,240,.80);
+}
+.floatcard:nth-of-type(1){animation-name:aitoCardFloatA}
+.floatcard:nth-of-type(2){animation-name:aitoCardFloatB;animation-delay:-1.7s}
+.floatcard:nth-of-type(3){animation-name:aitoCardFloatC;animation-delay:-3.1s}
+.floatcard:nth-of-type(4){animation-name:aitoCardFloatD;animation-delay:-4.6s}
+.floatcard:hover{box-shadow:none;z-index:12}
+.floatcard:hover .pic{box-shadow:0 26px 55px rgba(63,43,18,.25),0 0 30px rgba(234,195,111,.18)}
+
+/* soften old orbit so the scene reads as space/light, not a UI diagram */
+.orbit{opacity:.20;filter:blur(.15px)}
+.orb{opacity:.38;transform:scale(.78);box-shadow:0 8px 24px rgba(95,62,16,.09)}
+.glow{opacity:.68;filter:blur(14px);animation:aitoHeroGlow 6.5s ease-in-out infinite}
+
+@keyframes aitoLogoRise{
+  0%{opacity:0;transform:translateX(-50%) translateY(54px) scale(.68);filter:blur(4px) drop-shadow(0 0 0 rgba(212,155,48,0))}
+  46%{opacity:.93;filter:blur(0) drop-shadow(0 12px 18px rgba(108,67,9,.18))}
+  100%{opacity:1;transform:translateX(-50%) translateY(-14px) scale(1);filter:blur(0) drop-shadow(0 12px 18px rgba(108,67,9,.18))}
+}
+@keyframes aitoBreathAura{
+  0%,100%{opacity:.58;transform:translate(-50%,-50%) scale(.86)}
+  50%{opacity:1;transform:translate(-50%,-50%) scale(1.16)}
+}
+@keyframes aitoBreathRing{
+  0%,100%{opacity:.18;transform:translate(-50%,-50%) scale(.86)}
+  50%{opacity:.52;transform:translate(-50%,-50%) scale(1.07)}
+}
+@keyframes aitoBookHover{
+  0%,100%{transform:scale(1.06) translateY(0)}
+  50%{transform:scale(1.06) translateY(-5px)}
+}
+@keyframes aitoHeroGlow{
+  0%,100%{transform:scale(.94);opacity:.54}
+  50%{transform:scale(1.05);opacity:.78}
+}
+@keyframes aitoWindowLight{
+  0%{opacity:.50;transform:rotate(-9deg) translate3d(2%,-1%,0) scale(.98)}
+  55%{opacity:.82}
+  100%{opacity:.68;transform:rotate(-4deg) translate3d(-3%,2%,0) scale(1.04)}
+}
+@keyframes aitoDustDrift{
+  0%{background-position:0 0,0 0,0 0,center}
+  100%{background-position:72px -54px,-66px -88px,92px -122px,center}
+}
+@keyframes aitoCardFloatA{0%,100%{translate:0 0}50%{translate:5px -11px}}
+@keyframes aitoCardFloatB{0%,100%{translate:0 0}50%{translate:-5px -9px}}
+@keyframes aitoCardFloatC{0%,100%{translate:0 0}50%{translate:4px -8px}}
+@keyframes aitoCardFloatD{0%,100%{translate:0 0}50%{translate:-4px -12px}}
+
+@media(max-width:1050px){
+  .stage:before{right:-20%;width:115%}
+  .floatcard{width:180px}
+}
+@media(max-width:720px){
+  .stage:before{opacity:.48;right:-12%;top:-10%;height:105%}
+  .lamp{width:148px;height:132px;top:-17px}
+  .lamp:before{width:135px;height:135px}
+  .lamp:after{width:210px;height:155px}
+  .floatcard{width:154px}
+  .floatcard .pic{height:86px}
+  .floatcard b{font-size:.78rem}
+}
+@media(prefers-reduced-motion:reduce){
+  .stage:before,.stage:after,.book,.glow,.floatcard,.lamp:before,.lamp:after{animation:none!important}
+  .lamp{opacity:1;transform:translateX(-50%) translateY(-14px) scale(1)}
+}
