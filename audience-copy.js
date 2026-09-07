@@ -1,6 +1,33 @@
 /* AI 教學觀察所｜觀眾版網站文字 */
 (() => {
   const apply = () => {
+    /* AI 工具：改成對外公開、訪客導向的語氣 */
+    const tools = document.getElementById('tools');
+    if (tools) {
+      const eyebrow = tools.querySelector('.head .eyebrow');
+      const title = tools.querySelector('.head h2');
+      const intro = tools.querySelector('.head > p');
+
+      if (eyebrow) eyebrow.textContent = 'AI TOOLS / 教學資源';
+      if (title) title.textContent = '從教學目的出發，找到適合的 AI 工具';
+      if (intro) intro.textContent = '依照文字、圖像、影音與 AR／VR 等應用情境，整理課堂實際使用的 AI 與數位工具，提供教師、學生與教育工作者作為教學與創作參考。';
+
+      const toolCopy = {
+        'ChatGPT': '適合課程發想、提問設計、學習單規劃、提示詞撰寫與視覺生成等教學應用。',
+        'Gemini': '支援文字與圖像等多模態理解，可應用於視覺分析、資料整理、跨媒材創作與比較。',
+        'Pixverse': '可將靜態圖像轉為短影片，適合快速測試動態效果、建立影片原型與課堂創作。',
+        'EyeJack': '將影片或動畫疊加到平面圖像上，適合 AR 展示、互動作品與虛實整合。',
+        'NotebookLM': '可依據指定資料整理重點、生成摘要、簡報草稿與學習素材，適合資料導向的教學準備。'
+      };
+
+      tools.querySelectorAll('.tool').forEach((card) => {
+        const name = card.querySelector('h3')?.textContent?.trim();
+        const desc = card.querySelector('p');
+        if (name && desc && toolCopy[name]) desc.textContent = toolCopy[name];
+      });
+    }
+
+    /* Facebook：同樣維持觀眾導向 */
     const facebook = document.getElementById('facebook');
     if (!facebook) return;
 
