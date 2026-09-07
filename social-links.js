@@ -6,7 +6,7 @@
     s.defer = true;
     document.head.appendChild(s);
   };
-  load('hero-brand.js?v=20260906-4');
+  load('hero-v3.js?v=20260907-1');
   load('social-hub.js?v=20260906-1');
   load('audience-copy.js?v=20260907-1');
 })();
