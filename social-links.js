@@ -10,4 +10,5 @@
   load('hero-logo-patch.js?v=20260907-1');
   load('social-hub.js?v=20260906-1');
   load('audience-copy.js?v=20260907-1');
+  load('site-v2-patch.js?v=20260910-1');
 })();
