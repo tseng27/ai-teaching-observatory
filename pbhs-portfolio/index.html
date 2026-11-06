@@ -47,6 +47,12 @@
     .paper.template-portfolio figcaption{display:flex;gap:2.5mm;font-size:9pt;line-height:1.6;color:#3a332e;border-top:1px solid #26221f;margin-top:2mm;padding-top:2mm}.paper.template-portfolio figcaption b{color:var(--accText);font-family:Georgia,serif;font-weight:400}
     @media print{#printPaper.template-portfolio .evidence-grid{display:grid!important}#printPaper.template-portfolio figure{margin:0!important}#printPaper.template-portfolio figure img{width:100%!important;max-width:100%!important;height:62mm!important;max-height:none!important}#printPaper.template-portfolio .evidence-grid.n1 figure img,#printPaper.template-portfolio .evidence-grid.n3 figure:first-child img{height:100mm!important}#printPaper.template-portfolio .pf-cover{min-height:258mm}.paper.template-portfolio .doc-section h3{font-size:14pt}}
     @media(max-width:810px){.style-grid{grid-template-columns:repeat(2,1fr)}}
+    /* V5: 列印頁碼（封面頁不顯示） */
+    @media print{
+      @page{@bottom-center{content:"第 " counter(page) " 頁／共 " counter(pages) " 頁";font-family:"Noto Sans TC","Noto Sans CJK TC","Microsoft JhengHei",sans-serif;font-size:8.5pt;color:#7a7f82;vertical-align:middle}}
+      @page pfcover{@bottom-center{content:none}}
+      .paper.template-portfolio .pf-cover{page:pfcover}
+    }
     /* V4: 作品檔（跨裝置存檔） */
     .header-right{display:flex;align-items:center;gap:8px;min-width:0}.save-state{max-width:46vw;overflow:hidden;text-overflow:ellipsis}.save-state.dirty{color:#8a5a12!important;background:#fff4dc!important}
     .radio-pill.checked{border-color:var(--teal);background:#eef8f5;color:#086e68;font-weight:800}
