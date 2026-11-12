@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
-<title>課程學習成果學習單｜國立屏北高中</title>
+<title>課程學習成果檔案｜國立屏北高中</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700;900&display=swap" rel="stylesheet">
@@ -510,7 +510,7 @@ textarea{resize:vertical;min-height:150px;line-height:1.75}
 <div class="wrap">
   <header class="top">
     <small>LEARNING PORTFOLIO · PINBEI SENIOR HIGH SCHOOL</small>
-    <h1><span>國立屏北高級中學</span>　<span>課程學習成果</span></h1>
+    <h1><span>國立屏北高級中學</span>　<span>課程學習成果檔案</span></h1>
     <p>依序填寫五個區塊、加入照片，完成後按「預覽並下載 PDF」繳交</p>
     <div class="steps" id="steps"></div>
     <button class="btn ex-btn" type="button" id="exampleBtn">👀 看填寫範例</button>
@@ -595,7 +595,7 @@ textarea{resize:vertical;min-height:150px;line-height:1.75}
       <label class="chip"><input type="radio" name="ink" value="#1d3f9b" data-k="ink_blue" checked><span>藍色</span></label>
       <label class="chip"><input type="radio" name="ink" value="#222222" data-k="ink_black"><span>黑色</span></label>
       <span style="flex:1"></span>
-      <button class="btn ghost" type="button" id="blankBtn">🖨 下載空白學習單（紙本用）</button>
+      <button class="btn ghost" type="button" id="blankBtn">🖨 下載空白檔案（紙本用）</button>
       <button class="btn ghost" type="button" id="resetBtn">清除全部重填</button>
     </div>
   </div>
@@ -833,7 +833,7 @@ function promptFor(kind, slot){
   if (kind === "learning"){ task = "三、學習內容"; draft = d.learning; follow = "請引導我依「起點→觀察或練習→使用的方法→修正→作品完成」回憶真實過程。一次問我一個簡單問題，共 3～5 題。等我回答後，幫我整理成有順序的學習歷程，約 180～300 字，允許條列。"; }
   if (kind === "reflection"){ task = "四、心得與省思"; draft = d.reflection; follow = "請先問我：1. 最困難或最意外的是什麼？2. 我怎麼處理或改變想法？3. 下一次可以怎麼改進？一次只問一題，等我回答再繼續。最後依我的真實答案整理成 120～220 字的第一人稱省思，避免空泛讚美。"; }
   if (kind === "caption"){ task = "五、佐證資料（照片說明）"; draft = d["cap_" + slot] || ""; follow = "我有一張學習過程的照片。請先問我：照片拍的是哪個階段？我做了什麼？這張照片能證明什麼學習？然後根據我的回答，幫我寫一段 20～40 字、具體而不誇大的照片說明。請不要假裝看過照片。"; }
-  return `你是臺灣高中課程學習歷程的寫作教練。我要完成「國立屏北高級中學課程學習成果」中的【${task}】。\n\n課程背景：\n- 年級：${year}\n- 科目：${subject}\n- 單元／主題：${topic}\n- 我目前寫下的內容：${(draft || "").slice(0,700) || "目前還沒有內容"}\n\n請這樣協助我：\n${follow}\n\n必須遵守：\n1. 先向我提問，不要一開始就代寫整段。用高中生聽得懂的方式，每次只提一個問題。\n2. 不能編造我沒做過的活動、作品、感受、成績或 AI 工具使用情況。\n3. 如果資訊不夠，就繼續問我，不要自行補故事。\n4. 最後的文字保留我的語氣、使用臺灣繁體中文，清楚且自然，不要制式官樣文章。\n5. 結尾提醒我確認內容真實，並自己修改成能代表我的版本。`;
+  return `你是臺灣高中課程學習歷程的寫作教練。我要完成「國立屏北高級中學課程學習成果檔案」中的【${task}】。\n\n課程背景：\n- 年級：${year}\n- 科目：${subject}\n- 單元／主題：${topic}\n- 我目前寫下的內容：${(draft || "").slice(0,700) || "目前還沒有內容"}\n\n請這樣協助我：\n${follow}\n\n必須遵守：\n1. 先向我提問，不要一開始就代寫整段。用高中生聽得懂的方式，每次只提一個問題。\n2. 不能編造我沒做過的活動、作品、感受、成績或 AI 工具使用情況。\n3. 如果資訊不夠，就繼續問我，不要自行補故事。\n4. 最後的文字保留我的語氣、使用臺灣繁體中文，清楚且自然，不要制式官樣文章。\n5. 結尾提醒我確認內容真實，並自己修改成能代表我的版本。`;
 }
 function openAi(kind, slot){
   $("#aiTitle").textContent = ({overview:"成果概述怎麼寫？",learning:"學習內容怎麼寫？",reflection:"心得與省思怎麼寫？",caption:"照片說明怎麼寫？"})[kind] || "AI 寫作提示";
@@ -921,7 +921,7 @@ function drawContain(ctx, img, b){
 }
 function footer(ctx, n){
   ctx.save(); ctx.fillStyle = "#8a9399"; ctx.font = `11px ${SANS}`; ctx.textAlign = "center"; ctx.textBaseline = "alphabetic";
-  ctx.fillText(`國立屏北高級中學　課程學習成果　${n} / 2`, PW/2, PH - 22); ctx.restore();
+  ctx.fillText(`國立屏北高級中學　課程學習成果檔案　${n} / 2`, PW/2, PH - 22); ctx.restore();
 }
 function newPage(){
   const c = document.createElement("canvas"); c.width = Math.round(PW*SCALE); c.height = Math.round(PH*SCALE);
@@ -936,8 +936,8 @@ async function renderPages(blank, ex){
   try {
     await Promise.all([
       document.fonts.load(`20px "LXGW WenKai TC"`, (allText || "字") + "0123456789"),
-      document.fonts.load(`700 20px "Noto Serif TC"`, "國立屏北高級中學課程學習成果一二三四五、基本資料概述內容心得與省思佐證"),
-      document.fonts.load(`12px "Noto Sans TC"`, "科目名稱開課年級單元／主題課程時間指導教師學生姓名班級座號可思考：這個學了什麼？用哪些方法完成照片說明一二三年級國立屏北高級中學課程學習成果0123456789/LEARNINGPORTFOLIO·")
+      document.fonts.load(`700 20px "Noto Serif TC"`, "國立屏北高級中學課程學習成果檔案一二三四五、基本資料概述內容心得與省思佐證"),
+      document.fonts.load(`12px "Noto Sans TC"`, "科目名稱開課年級單元／主題課程時間指導教師學生姓名班級座號可思考：這個學了什麼？用哪些方法完成照片說明一二三年級國立屏北高級中學課程學習成果檔案0123456789/LEARNINGPORTFOLIO·")
     ]);
   } catch(e) {}
   const imgs = {};
@@ -950,7 +950,7 @@ async function renderPages(blank, ex){
   x1.fillStyle = "#147e7c"; x1.fillRect(M, 40, 46, 4);
   x1.fillStyle = "#6a7a80"; x1.font = `700 10.5px ${SANS}`; x1.textBaseline = "alphabetic";
   x1.fillText("LEARNING PORTFOLIO · PINBEI SENIOR HIGH SCHOOL", M, 62);
-  x1.fillStyle = "#1b1b1b"; x1.font = `900 30px ${SERIF}`; x1.fillText("國立屏北高級中學　課程學習成果", M, 104);
+  x1.fillStyle = "#1b1b1b"; x1.font = `900 30px ${SERIF}`; x1.fillText("國立屏北高級中學　課程學習成果檔案", M, 104);
   x1.strokeStyle = "#1b1b1b"; x1.lineWidth = 2; x1.beginPath(); x1.moveTo(M, 120); x1.lineTo(PW-M, 120); x1.stroke();
 
   // 一、基本資料 table
@@ -1004,7 +1004,7 @@ async function renderPages(blank, ex){
   // ===== page 2 =====
   const [c2, x2] = newPage();
   x2.fillStyle = "#6a7a80"; x2.font = `700 10.5px ${SANS}`; x2.textBaseline = "alphabetic";
-  x2.fillText("課程學習成果（續）", M, 52);
+  x2.fillText("課程學習成果檔案（續）", M, 52);
   const who = [d.cls, d.seat ? d.seat + "號" : "", d.student].filter(Boolean).join(" ");
   if (who){ x2.save(); x2.textAlign = "right"; x2.fillStyle = color; x2.font = `15px ${HAND}`; x2.fillText(who, PW - M, 52); x2.restore(); }
   x2.strokeStyle = "#1b1b1b"; x2.lineWidth = 1.2; x2.beginPath(); x2.moveTo(M, 62); x2.lineTo(PW-M, 62); x2.stroke();
@@ -1065,7 +1065,7 @@ function makePdf(pages, d){
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF({ orientation:"portrait", unit:"mm", format:"a4", compress:true });
   pages.forEach((c, i) => { if (i) pdf.addPage("a4","portrait"); pdf.addImage(c.toDataURL("image/jpeg", 0.9), "JPEG", 0, 0, 210, 297); });
-  pdf.setProperties({ title:"國立屏北高級中學 課程學習成果", author:(d && d.student) || "", subject:[d && d.subject, d && d.unit].filter(Boolean).join(" ") });
+  pdf.setProperties({ title:"國立屏北高級中學 課程學習成果檔案", author:(d && d.student) || "", subject:[d && d.subject, d && d.unit].filter(Boolean).join(" ") });
   return pdf.output("blob");
 }
 function downloadBlob(blob, name){
@@ -1106,14 +1106,14 @@ $("#modal").addEventListener("click", e => { if (e.target.id === "modal") $("#mo
 $("#dlBtn").addEventListener("click", () => {
   const msg = $("#dlMsg"); if (!lastPages) return;
   try {
-    const name = `課程學習成果${baseName() ? "_" + baseName() : ""}.pdf`;
+    const name = `課程學習成果檔案${baseName() ? "_" + baseName() : ""}.pdf`;
     downloadBlob(makePdf(lastPages, getData()), name);
     msg.className = "msg"; msg.textContent = "已開始下載：" + name + "　接著請到 Google Classroom 上傳這個 PDF。";
   } catch(e){ msg.className = "msg err"; msg.textContent = "產生 PDF 失敗：" + e.message; }
 });
 $("#blankBtn").addEventListener("click", async () => {
   const b = $("#blankBtn"); b.disabled = true;
-  try { const pages = await renderPages(true); downloadBlob(makePdf(pages, {}), "課程學習成果_空白學習單.pdf"); toast("已下載空白學習單"); }
+  try { const pages = await renderPages(true); downloadBlob(makePdf(pages, {}), "課程學習成果檔案_空白.pdf"); toast("已下載空白檔案"); }
   catch(e){ toast("產生失敗：" + e.message); }
   b.disabled = false;
 });
@@ -1121,7 +1121,7 @@ $("#blankBtn").addEventListener("click", async () => {
 // ---------- progress file ----------
 $("#saveFileBtn").addEventListener("click", async () => {
   await save();
-  const name = `課程學習成果_進度檔${baseName() ? "_" + baseName() : ""}.json`;
+  const name = `課程學習成果檔案_進度檔${baseName() ? "_" + baseName() : ""}.json`;
   downloadBlob(new Blob([JSON.stringify(snapshot())], { type:"application/json" }), name);
   toast("進度檔已下載");
   $("#fileMsg").textContent = "已下載「" + name + "」。換裝置時，按「載入進度檔」選這個檔案就能接著寫。";
@@ -1131,7 +1131,7 @@ $("#loadFileInput").addEventListener("change", async e => {
   const f = e.target.files[0]; e.target.value = ""; if (!f) return;
   try {
     const s = JSON.parse(await f.text());
-    if (!s || s.app !== APP) throw new Error("這不是本學習單的進度檔");
+    if (!s || s.app !== APP) throw new Error("這不是本檔案的進度檔");
     applySnapshot(s); await save(); toast("已載入進度檔");
     $("#fileMsg").textContent = "已載入「" + f.name + "」（儲存於 " + new Date(s.savedAt).toLocaleString("zh-TW") + "）";
   } catch(err){ toast(err.message || "無法讀取這個檔案"); }
